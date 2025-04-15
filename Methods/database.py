@@ -1,7 +1,6 @@
 import mysql.connector
 from dotenv import load_dotenv
 import os
-
 load_dotenv()
 
 
@@ -15,7 +14,7 @@ cursor = db.cursor()
 
 
 
-create_table_query = """CREATE TABLE users (
+create_users_query = """CREATE TABLE users (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     username VARCHAR(100) UNIQUE NOT NULL,
                     password VARCHAR(100) NOT NULL,
@@ -31,7 +30,7 @@ create_conversation_query = """CREATE TABLE conversations (
                             creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                             FOREIGN KEY (user_id) REFERENCES users(id)
                             );"""
-            
+
 create_message_query = """CREATE TABLE messages (
                         message_id INT PRIMARY KEY AUTO_INCREMENT,
                         convo_id INT NOT NULL,
@@ -40,14 +39,41 @@ create_message_query = """CREATE TABLE messages (
                         sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                         FOREIGN KEY (convo_id) REFERENCES conversations(id)
                         );"""
-"""
-cursor.execute(create_message_query)
-db.commit()
-"""
 
 
+def table_exists(db, table_name):
+    cursor = db.cursor()
+    try:
+        cursor.execute(f"""
+            SELECT COUNT(*)
+            FROM information_schema.tables
+            WHERE table_schema = DATABASE()
+            AND table_name = '{table_name}'
+        """)
+        return cursor.fetchone()[0] == 1
+    finally:
+        cursor.close()
 
+try:
+    if not table_exists(db, "users"):
+        cursor.execute(create_users_query)
+        print("Table users created successfully")
 
+    if not table_exists(db, "conversations"):
+        cursor.execute(create_users_query)
+        print("Table conversations created successfully")
+
+    if not table_exists(db, "messages"):
+        cursor.execute(create_users_query)
+        print("Table messages created successfully")
+
+    db.commit()
+    print("All tables are created successfully")
+except mysql.connector.Error as err:
+    db.rollback()
+    print(f"Error: {err} ")
+finally:
+    db.close()
 
 
 def user_check(username):

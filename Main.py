@@ -5,8 +5,7 @@ import ast
 from tkinter import messagebox
 from Methods import database as db, text_to_speech as tts, AI_api as ai, passwordCheck as pc, YT_trans as tran, pdf
 import threading
-from dotenv import load_dotenv
-import os
+
 
 
 ctk.set_appearance_mode("dark")
