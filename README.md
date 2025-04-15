@@ -49,8 +49,8 @@ A **full-featured Python tkinter application** that combines secure user authent
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/tkinter-chatbot.git
-   cd tkinter-chatbot
+   git clone https://github.com/yourusername/Python-Tkinter-ChatBot
+   cd Python-Tkinter-ChatBot
 
 2. **Set Up Virtual Environment**:
    ```bash
