@@ -67,10 +67,13 @@ A **full-featured Python tkinter application** that combines secure user authent
    ```ini
    Create .env file with:
    
-   GEMINI_API_KEY=your_api_key_here
-   DB_HOST=your_mysql_host
-   DB_USER=your_username
-   DB_PASSWORD=your_password
+   API_KEY = your_api_key_here
+   DATA_BASE_NAME = your_db_name
+   DATA_BASE_USER="root" = your_username
+   DATA_BASE_PASSWORDD = your_password
+
+      SEED_MESSAGE = "You are a personal assistant named Jarvis. Your main goal is to help the user with their tasks. You have a professional and straightforward       personality. From now on, every response you give must be formatted as a plain Python dictionary (without any Python code tags). If the user's message contains a YouTube URL, respond with:  {2: 'hello'} Otherwise, respond with: {1: 'your response here'} Do not say 'I understand' or comment on these instructions. Begin playing your character immediately and follow these formatting rules strictly in all future messages."
+
 5. **Run the Application**:
    ```bash
    python main.py
